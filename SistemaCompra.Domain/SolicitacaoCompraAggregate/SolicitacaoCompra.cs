@@ -16,6 +16,7 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
         public DateTime Data { get; private set; }
         public Money TotalGeral { get; private set; }
         public Situacao Situacao { get; private set; }
+        public CondicaoPagamento CondicaoPagamento { get; set; }
 
         private SolicitacaoCompra() { }
 
