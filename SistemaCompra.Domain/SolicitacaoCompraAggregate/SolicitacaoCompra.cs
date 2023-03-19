@@ -36,7 +36,12 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 
         public void RegistrarCompra(IEnumerable<Item> itens)
         {
-           
+            if (!itens.Any())
+                throw new BusinessRuleException("A solicitação de compra deve possuir itens!");
+
+            if (itens.Sum(x => x.Subtotal.Value) > 50000)
+                CondicaoPagamento = new CondicaoPagamento(30);
+
         }
     }
 }
