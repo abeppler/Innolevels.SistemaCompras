@@ -41,7 +41,6 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 
             if (itens.Sum(x => x.Subtotal.Value) > 50000)
                 CondicaoPagamento = new CondicaoPagamento(30);
-
         }
     }
 }
