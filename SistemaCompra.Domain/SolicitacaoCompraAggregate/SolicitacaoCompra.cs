@@ -53,6 +53,7 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             if (TotalGeral.Value > 50000)
                 CondicaoPagamento = new CondicaoPagamento(30);
 
+            AddEvent(new CompraRegistradaEvent(Id, Itens, TotalGeral.Value));
         }
     }
 }
