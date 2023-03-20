@@ -1,11 +1,13 @@
 ﻿using MediatR;
-
-using SolicitacaoCompraAgg = SistemaCompra.Domain.SolicitacaoCompraAggregate;
+using SistemaCompra.Domain.SolicitacaoCompraAggregate;
+using System.Collections.Generic;
 
 namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
 {
     public class RegistrarCompraCommand : IRequest<bool>
     {
-        public SolicitacaoCompraAgg.SolicitacaoCompra SolicitacaoCompra { get; internal set; }
+        public string UsuarioSolicitante { get; set; }
+        public string NomeFornecedor { get; set; }
+        public IEnumerable<Item> Itens { get; set; }
     }
 }

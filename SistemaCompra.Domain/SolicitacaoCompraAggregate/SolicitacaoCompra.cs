@@ -27,11 +27,17 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             NomeFornecedor = new NomeFornecedor(nomeFornecedor);
             Data = DateTime.Now;
             Situacao = Situacao.Solicitado;
+            TotalGeral = new Money();
+            Itens = new List<Item>();
         }
 
         public void AdicionarItem(Produto produto, int qtde)
         {
             Itens.Add(new Item(produto, qtde));
+
+
+            var valorItem = new Money(produto.Preco.Value * qtde);
+            TotalGeral = TotalGeral.Add(valorItem);
         }
 
         public void RegistrarCompra(IEnumerable<Item> itens)
@@ -39,8 +45,14 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             if (!itens.Any())
                 throw new BusinessRuleException("A solicitação de compra deve possuir itens!");
 
-            if (itens.Sum(x => x.Subtotal.Value) > 50000)
+            foreach (var item in itens)
+            {
+                AdicionarItem(item.Produto, item.Qtde);
+            }
+
+            if (TotalGeral.Value > 50000)
                 CondicaoPagamento = new CondicaoPagamento(30);
+
         }
     }
 }
