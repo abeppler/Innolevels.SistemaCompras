@@ -48,6 +48,7 @@ namespace SistemaCompra.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Prova Sisprev", Version = "v1" });
+                c.CustomSchemaIds(x => x.FullName);
             });          
 
         }
